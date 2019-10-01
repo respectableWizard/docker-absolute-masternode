@@ -2,8 +2,8 @@
 
 set -e
 
-#  absolute Masternode docker template
-#  Copyright © 2019 cryon.io
+#  Absolute Masternode docker template
+#  Copyright © 2019 comozo
 #
 #  This program is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU Affero General Public License as published
@@ -18,7 +18,6 @@ set -e
 #  You should have received a copy of the GNU Affero General Public License
 #  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #
-#  Contact: cryi@tutanota.com
 
 GIT_INFO=$(curl -sL "https://api.github.com/repos/absolute-community/absolute/releases/latest")
 
@@ -49,12 +48,10 @@ case "$URL" in
     ;;
 esac
 
-mv -f "$(find . -name absoluted)" /usr/bin
-mv -f "$(find . -name absolute-cli)" /usr/bin
+mv -f "$(find . -name absoluted)" /usr/local/bin
+mv -f "$(find . -name absolute-cli)" /usr/local/bin
 
-# Need to figure out the right version
-cp -f "$(find . -name absoluted)" . 2>/dev/null
-cp -f "$(find . -name absolute-cli)" . 2>/dev/null
+mv ./$FILE* /tmp
 
 printf "%s" "$(printf "%s" "$GIT_INFO" | jq .tag_name -r | sed 's\v\\')" > ./version
 

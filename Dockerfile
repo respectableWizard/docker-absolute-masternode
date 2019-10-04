@@ -44,6 +44,7 @@ EXPOSE ${PORT}
 VOLUME ["${HOME}"]
 WORKDIR ${HOME}
 ADD ./bin /usr/local/bin
-RUN chmod 777 /usr/local/bin/start-unprivileged.sh
+RUN chmod 777 /usr/local/bin/start-unprivileged.sh \
+    /usr/local/bin/docker-entrypoint.sh
 ENTRYPOINT ["docker-entrypoint.sh"]
 CMD ["start-unprivileged.sh"]

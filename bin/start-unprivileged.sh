@@ -2,7 +2,7 @@
 set -x
 
 EXECUTABLE=/usr/local/bin/absoluted
-DIR=$HOME/.absolute
+DIR=$HOME/.absolutecore
 FILENAME=absolute.conf
 FILE=$DIR/$FILENAME
 RPCPORT=${RPCPORT:-7209}

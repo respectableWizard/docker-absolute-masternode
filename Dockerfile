@@ -7,7 +7,7 @@ ARG VERSION
 
 ENV USER absolute
 ENV HOME /home/${USER}
-ENV PORT 7208
+ENV PORT 18888
 
 # add user with specified (or default) user/group ids
 ENV USER_ID ${USER_ID:-1000}

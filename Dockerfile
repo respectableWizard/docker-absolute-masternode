@@ -33,6 +33,19 @@ RUN set -x \
     && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
     && gosu nobody true
 
+RUN set -x \
+    && apt-get update && apt-get install -y libminiupnpc-dev python-virtualenv git virtualenv cron \
+    && mkdir -p /sentinel \
+    && cd /sentinel \
+    && git clone https://github.com/absolute-community/sentinel.git . \
+    && virtualenv ./venv \
+    && ./venv/bin/pip install -r requirements.txt \
+    && touch sentinel.log \
+    && chown -R ${USER} /sentinel \
+    && echo '* * * * * '${USER}' cd /sentinel && SENTINEL_DEBUG=1 ./venv/bin/python bin/sentinel.py >> sentinel.log 2>&1' >> /etc/cron.d/sentinel \
+    && chmod 0644 /etc/cron.d/sentinel \
+    && touch /var/log/cron.log
+
 COPY tools/get-node.sh ./get-node.sh
 
 # set execution rights
